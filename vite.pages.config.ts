@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 const root = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
-  base: "/meridian-calculator/",
+  base: process.env.ANDROID_APK === "1" ? "./" : "/meridian-calculator/",
   root: fileURLToPath(new URL("./pages-host", import.meta.url)),
   publicDir: fileURLToPath(new URL("./public", import.meta.url)),
   plugins: [tailwindcss(), viteReact()],

@@ -13,9 +13,9 @@ screenshots
 artifacts
 attachments
 .tanstack
-.node_modules.lock
+android/.gradle
+android/build
+android/app/build
+android/app/src/main/assets/www
+android/local.properties
 
-.grok/
-.project_id
-AGENTS.md
-AGENTS.project.md

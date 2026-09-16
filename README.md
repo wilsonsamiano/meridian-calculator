@@ -2,6 +2,14 @@
 
 Open-source **offline graphing calculator**. Plot functions, trace values, and calculate on Linux, Windows, macOS, iPad, iPhone, and Android.
 
+## Android APK
+
+**[Download Meridian for Android](https://github.com/wilsonsamiano/meridian-calculator/releases/latest)** — get `meridian-1.0.0.apk` from Releases.
+
+1. Download the APK on your phone or tablet.
+2. Open the file. Allow install from GitHub / your browser if Android asks.
+3. Meridian shows up in the app drawer and works **offline**.
+
 ## Use / install the web app
 
 **[Open Meridian](https://wilsonsamiano.github.io/meridian-calculator/)** — that is the live app. Open it in Brave, Chrome, Edge, or Safari, then install it:

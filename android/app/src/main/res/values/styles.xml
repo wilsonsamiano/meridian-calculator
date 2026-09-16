@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Meridian" parent="android:Theme.DeviceDefault.NoActionBar">
+        <item name="android:statusBarColor">#090a0d</item>
+        <item name="android:navigationBarColor">#090a0d</item>
+        <item name="android:windowBackground">#090a0d</item>
+        <item name="android:colorPrimary">#090a0d</item>
+    </style>
+</resources>

@@ -1,0 +1,75 @@
+name: Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: npm install
+
+      - name: Build web assets
+        run: ANDROID_APK=1 node scripts/build-pages.mjs
+        env:
+          ANDROID_APK: "1"
+
+      - name: Copy into Android assets
+        run: |
+          rm -rf android/app/src/main/assets/www
+          mkdir -p android/app/src/main/assets/www
+          cp -a .output/public/. android/app/src/main/assets/www/
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Assemble release APK
+        working-directory: android
+        run: gradle assembleRelease --no-daemon
+
+      - name: Stage APK
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/release/app-release.apk dist/meridian-1.0.0.apk
+          ls -lh dist/meridian-1.0.0.apk
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.0' }}
+          name: Meridian ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.0' }}
+          files: dist/meridian-1.0.0.apk
+          fail_on_unmatched_files: true
+          make_latest: true
+          body: |
+            Offline Android build of **Meridian**, the open-source graphing calculator.
+
+            **APK:** `meridian-1.0.0.apk` (sideload)
+
+            1. Download the APK on your Android phone or tablet.
+            2. Open it. Allow install from this source if Android asks.
+            3. Meridian appears in your app drawer and works offline.
+
+            Web app: https://wilsonsamiano.github.io/meridian-calculator/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
