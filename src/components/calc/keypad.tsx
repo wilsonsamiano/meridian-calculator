@@ -122,9 +122,10 @@ export function Keypad() {
   };
 
   return (
-    <div className="grid h-full min-h-0 grid-cols-5 grid-rows-7 gap-1 p-1 squat:gap-1 squat:p-1 sm:gap-1.5 sm:p-1.5">
+    <div className="grid h-full min-h-0 grid-cols-5 grid-rows-7 gap-1.5 p-1.5 wide:gap-1.5 wide:p-1.5 squat:gap-1 squat:p-1">
       {KEYS.map((key) => {
         const isShiftKey = key.id === "2nd" && second;
+        const shifted = Boolean(second && key.second);
         const label =
           key.id === "angle"
             ? angleMode === "rad"
@@ -132,8 +133,9 @@ export function Keypad() {
               : "DEG"
             : key.id === "del" && second
               ? "AC"
-              : key.label;
-        const hasSecond = Boolean(key.second && key.id !== "angle" && key.id !== "del");
+              : shifted
+                ? key.second
+                : key.label;
         return (
           <button
             key={key.id}
@@ -145,30 +147,20 @@ export function Keypad() {
               press(key);
             }}
             className={cn(
-              "relative flex h-full min-h-0 w-full touch-manipulation flex-col items-center justify-center overflow-hidden rounded-md",
-              "select-none font-sans text-sm font-medium leading-none squat:text-[0.8rem]",
+              "relative flex h-full min-h-0 w-full touch-manipulation items-center justify-center overflow-hidden rounded-lg",
+              "select-none font-sans text-[1.05rem] font-medium leading-none wide:rounded-md wide:text-sm squat:text-[0.85rem]",
               "shadow-[var(--shadow-border)]",
               "transition-[transform,box-shadow,background-color,color] duration-150 ease-out",
               "active:scale-[0.97] active:brightness-110",
               "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
               variantClass[key.variant],
               isShiftKey && "bg-accent text-accent-fg",
-              key.id === "0" && "text-base",
-              key.variant === "num" && "text-base tabular-nums squat:text-[0.95rem]",
-              key.id === "eq" && "row-span-2 text-lg",
+              shifted && !isShiftKey && "text-accent",
+              key.variant === "num" && "text-[1.35rem] tabular-nums wide:text-base squat:text-[1.05rem]",
+              key.id === "eq" && "row-span-2 text-2xl wide:text-lg",
             )}
           >
-            {hasSecond ? (
-              <span
-                className={cn(
-                  "absolute left-0 right-0 top-0.5 text-center text-[0.58rem] font-medium leading-none squat:top-px squat:text-[0.5rem]",
-                  second ? "text-accent" : "text-subtle",
-                )}
-              >
-                {key.second}
-              </span>
-            ) : null}
-            <span>{label}</span>
+            <span className="px-0.5 text-center">{label}</span>
           </button>
         );
       })}

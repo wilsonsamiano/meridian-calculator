@@ -14,3 +14,8 @@ artifacts
 attachments
 .tanstack
 .node_modules.lock
+
+.grok/
+.project_id
+AGENTS.md
+AGENTS.project.md

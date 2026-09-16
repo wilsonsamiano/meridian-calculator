@@ -2,13 +2,25 @@
 
 Open-source **offline graphing calculator**. Plot functions, trace values, and calculate on Linux, Windows, macOS, iPad, iPhone, and Android.
 
+## Use / install the web app
+
+**[Open Meridian](https://wilsonsamiano.github.io/meridian-calculator/)** — that is the live app. Open it in Brave, Chrome, Edge, or Safari, then install it:
+
+| Device | How to install |
+| --- | --- |
+| **Brave / Chrome / Edge** (Linux, Windows, Mac, Android) | Address-bar install icon, or menu → **Install page as app** / **Add to Home screen** |
+| **Safari on iPhone / iPad** | Share → **Add to Home Screen** |
+| **Safari on Mac** | File → **Add to Dock** |
+
+Brave on iPhone cannot install web apps (Apple). Open the same link in Safari, then Add to Home Screen.
+
 **License:** [MIT](LICENSE) · **Source:** [github.com/wilsonsamiano/meridian-calculator](https://github.com/wilsonsamiano/meridian-calculator)
 
 Support development: [buymeacoffee.com/wilsonsamiano](https://buymeacoffee.com/wilsonsamiano)
 
-## Install as a desktop app
+## Desktop launcher (optional)
 
-Meridian is a Progressive Web App. After you open it once in a Chromium browser, it can live in your app launcher, Start menu, or Dock — no store account, works offline.
+After you open the [web app](https://wilsonsamiano.github.io/meridian-calculator/) once:
 
 ### Linux (CachyOS, Ubuntu, Fedora, Arch, …)
 
@@ -23,20 +35,12 @@ mv ~/Downloads/meridian.desktop ~/.local/share/applications/
 
 ### Windows
 
-Edge or Chrome → menu → **Apps → Install this site as an app**. Pin to Start or the taskbar.
+Edge, Brave, or Chrome → menu → **Apps → Install this site as an app**. Pin to Start or the taskbar.
 
 ### macOS
 
-- **Chrome:** menu → **Install Meridian**
+- **Brave / Chrome:** menu → **Install Meridian** / **Install page as app**
 - **Safari:** File → **Add to Dock**
-
-### iPhone / iPad
-
-Share → **Add to Home Screen**.
-
-### Android
-
-Chrome menu → **Install app**.
 
 ## Features
 
@@ -55,7 +59,7 @@ npm install
 npm run dev
 ```
 
-Requires Node 22. The calculator is client-side only (no account, no database).
+Requires Node 22. The calculator is client-side only (no account, no database). GitHub Pages builds with `npm run build:pages`.
 
 ## License
 

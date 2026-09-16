@@ -1,16 +1,18 @@
-const CACHE = "meridian-v1";
+const CACHE = "meridian-v2";
+const SCOPE = self.registration.scope;
 const PRECACHE = [
-  "/",
-  "/favicon.svg",
-  "/icon-192.png",
-  "/icon-512.png",
-  "/apple-touch-icon.png",
-  "/fonts/ibm-plex-sans-400.woff2",
-  "/fonts/ibm-plex-sans-500.woff2",
-  "/fonts/ibm-plex-sans-600.woff2",
-  "/fonts/ibm-plex-mono-400.woff2",
-  "/fonts/ibm-plex-mono-500.woff2",
-];
+  "./",
+  "./favicon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./apple-touch-icon.png",
+  "./manifest.webmanifest",
+  "./fonts/ibm-plex-sans-400.woff2",
+  "./fonts/ibm-plex-sans-500.woff2",
+  "./fonts/ibm-plex-sans-600.woff2",
+  "./fonts/ibm-plex-mono-400.woff2",
+  "./fonts/ibm-plex-mono-500.woff2",
+].map((path) => new URL(path, SCOPE).href);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -32,7 +34,7 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/__grok/")) return;
+  if (url.pathname.includes("/api/") || url.pathname.includes("/__grok/")) return;
 
   event.respondWith(
     fetch(event.request)
@@ -43,6 +45,8 @@ self.addEventListener("fetch", (event) => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request).then((hit) => hit || caches.match("/"))),
+      .catch(() =>
+        caches.match(event.request).then((hit) => hit || caches.match(new URL("./", SCOPE))),
+      ),
   );
 });

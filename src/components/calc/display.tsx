@@ -40,8 +40,8 @@ export function Display() {
   return (
     <div
       className={cn(
-        "flex min-h-[4.75rem] flex-col rounded-lg bg-inset px-3 py-2 shadow-[var(--shadow-border)]",
-        "sm:min-h-[6.25rem] sm:px-4 squat:min-h-[4.5rem] squat:py-1.5 sm:squat:min-h-[4.75rem]",
+        "flex min-h-[4rem] flex-col rounded-lg bg-inset px-3 py-1.5 shadow-[var(--shadow-border)]",
+        "wide:min-h-[5.5rem] wide:px-4 wide:py-2 squat:min-h-[4.25rem]",
         !editingPlot && "ring-1 ring-accent/35",
       )}
     >

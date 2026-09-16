@@ -99,7 +99,7 @@ export function CalculatorApp() {
       <header className="flex shrink-0 items-center justify-between gap-3 px-1 pb-1.5 pt-0.5 squat:pb-1">
         <div className="min-w-0">
           <h1 className="text-[0.95rem] font-semibold tracking-tight">Meridian</h1>
-          <p className="text-[0.68rem] font-medium uppercase tracking-[0.16em] text-subtle">
+          <p className="hidden text-[0.68rem] font-medium uppercase tracking-[0.16em] text-subtle wide:block">
             Graphing calculator
           </p>
         </div>
@@ -116,7 +116,7 @@ export function CalculatorApp() {
           </a>
           <InstallControls />
           <div
-            className="flex rounded-md bg-raised p-0.5 shadow-[var(--shadow-border)]"
+            className="hidden rounded-md bg-raised p-0.5 shadow-[var(--shadow-border)] wide:flex"
             role="group"
             aria-label="Keypad side"
           >
@@ -183,7 +183,7 @@ export function CalculatorApp() {
 
         <section
           className={cn(
-            "flex min-h-0 flex-col gap-2 wide:w-[min(26rem,42vw)] wide:min-w-[18rem] wide:shrink-0",
+            "flex min-h-0 flex-1 flex-col gap-2 wide:w-[min(26rem,42vw)] wide:min-w-[18rem] wide:flex-none wide:shrink-0",
             tab !== "calc" && "hidden wide:flex",
           )}
         >
@@ -193,14 +193,6 @@ export function CalculatorApp() {
               <HistoryList />
             </div>
           ) : null}
-          <div
-            className={cn(
-              "max-h-[38%] shrink-0 overflow-y-auto overscroll-contain wide:hidden",
-              tab === "graph" && "hidden",
-            )}
-          >
-            <PlotList />
-          </div>
           <div className="min-h-0 flex-1">
             <div className="h-full min-h-0 overflow-hidden rounded-xl bg-surface shadow-[var(--shadow-border)]">
               <Keypad />
