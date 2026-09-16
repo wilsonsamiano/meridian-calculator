@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Calculator, LineChart, Table2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCalcStore } from "@/store/calculator";
+import { applyChromeInset } from "@/lib/calc/chrome-inset";
 import { CoffeeButton } from "./coffee-button";
 import { Display } from "./display";
 import { GraphCanvas } from "./graph-canvas";
@@ -27,6 +28,19 @@ export function CalculatorApp() {
   const angleMode = useCalcStore((s) => s.angleMode);
   const leftHanded = useCalcStore((s) => s.leftHanded);
   const setLeftHanded = useCalcStore((s) => s.setLeftHanded);
+
+  useEffect(() => {
+    applyChromeInset();
+    const onResize = () => applyChromeInset();
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+    window.visualViewport?.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
+      window.visualViewport?.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -91,12 +105,17 @@ export function CalculatorApp() {
       data-tab={tab}
       className={cn(
         "relative flex h-svh max-h-dvh min-h-0 flex-col overflow-hidden bg-bg text-fg",
-        "pt-[max(0.45rem,env(safe-area-inset-top))]",
+        "pt-[var(--chrome-top)]",
         "pr-[max(0.45rem,env(safe-area-inset-right))]",
         "pb-[max(0.3rem,env(safe-area-inset-bottom))]",
         "pl-[max(0.45rem,env(safe-area-inset-left))]",
       )}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-x-0 top-0 z-50 bg-bg"
+        style={{ height: "var(--chrome-top)" }}
+      />
       <header className="flex shrink-0 items-center justify-between gap-3 px-1 pb-1.5 pt-0.5 squat:pb-1">
         <div className="min-w-0">
           <h1 className="text-[0.95rem] font-semibold tracking-tight">Meridian</h1>

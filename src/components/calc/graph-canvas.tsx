@@ -60,14 +60,16 @@ export function GraphCanvas() {
     const canvas = canvasRef.current;
     const wrap = wrapRef.current;
     if (!canvas || !wrap) return;
-    const dpr = Math.min(2.5, window.devicePixelRatio || 1);
-    const width = wrap.clientWidth;
-    const height = wrap.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
+    const width = Math.max(1, Math.round(wrap.clientWidth));
+    const height = Math.max(1, Math.round(wrap.clientHeight));
     if (width < 8 || height < 8) return;
 
-    if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
+    const bw = Math.round(width * dpr);
+    const bh = Math.round(height * dpr);
+    if (canvas.width !== bw || canvas.height !== bh) {
+      canvas.width = bw;
+      canvas.height = bh;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
     }
@@ -219,7 +221,14 @@ export function GraphCanvas() {
     if (!wrap) return;
     const ro = new ResizeObserver(() => draw());
     ro.observe(wrap);
-    return () => ro.disconnect();
+    const onVp = () => draw();
+    window.visualViewport?.addEventListener("resize", onVp);
+    window.addEventListener("orientationchange", onVp);
+    return () => {
+      ro.disconnect();
+      window.visualViewport?.removeEventListener("resize", onVp);
+      window.removeEventListener("orientationchange", onVp);
+    };
   }, [draw]);
 
   const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -307,10 +316,11 @@ export function GraphCanvas() {
       : null;
 
   return (
-    <div ref={wrapRef} className="relative h-full min-h-0 w-full">
+    <div ref={wrapRef} className="relative h-full min-h-0 w-full [transform:translateZ(0)]">
       <canvas
         ref={canvasRef}
-        className="block h-full w-full touch-none"
+        className="block touch-none"
+        style={{ width: "100%", height: "100%" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
