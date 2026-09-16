@@ -4,11 +4,13 @@ Open-source **offline graphing calculator**. Plot functions, trace values, and c
 
 ## Android APK
 
-**[Download Meridian for Android](https://github.com/wilsonsamiano/meridian-calculator/releases/latest)** — get `meridian-1.0.0.apk` from Releases.
+**[Download the APK](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)** (`meridian.apk`)
 
-1. Download the APK on your phone or tablet.
-2. Open the file. Allow install from GitHub / your browser if Android asks.
+1. Tap that link on your Android phone or tablet — it should download the file.
+2. Open `meridian.apk`. Allow install from the browser if Android asks.
 3. Meridian shows up in the app drawer and works **offline**.
+
+If an older build is already installed, install this one over it.
 
 ## Use / install the web app
 
@@ -24,7 +26,7 @@ Brave on iPhone cannot install web apps (Apple). Open the same link in Safari, t
 
 **License:** [MIT](LICENSE) · **Source:** [github.com/wilsonsamiano/meridian-calculator](https://github.com/wilsonsamiano/meridian-calculator)
 
-Support development: [buymeacoffee.com/wilsonsamiano](https://buymeacoffee.com/wilsonsamiano)
+Support development: [Buy me a coffee](https://www.buymeacoffee.com/wilsonsamiano)
 
 ## Desktop launcher (optional)
 

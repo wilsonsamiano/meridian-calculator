@@ -52,26 +52,28 @@ jobs:
       - name: Stage APK
         run: |
           mkdir -p dist
-          cp android/app/build/outputs/apk/release/app-release.apk dist/meridian-1.0.0.apk
-          ls -lh dist/meridian-1.0.0.apk
+          cp android/app/build/outputs/apk/release/app-release.apk dist/meridian.apk
+          ls -lh dist/meridian.apk
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.0' }}
-          name: Meridian ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.0' }}
-          files: dist/meridian-1.0.0.apk
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.1' }}
+          name: Meridian ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.1' }}
+          files: dist/meridian.apk
           fail_on_unmatched_files: true
           make_latest: true
           body: |
-            Offline Android build of **Meridian**, the open-source graphing calculator.
+            Offline Android build of **Meridian**.
 
-            **APK:** `meridian-1.0.0.apk` (sideload)
+            **Direct download:** [meridian.apk](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)
 
             1. Download the APK on your Android phone or tablet.
             2. Open it. Allow install from this source if Android asks.
-            3. Meridian appears in your app drawer and works offline.
+            3. If you already had v1.0.0, install this over it.
 
             Web app: https://wilsonsamiano.github.io/meridian-calculator/
+
+            Buy me a coffee: https://www.buymeacoffee.com/wilsonsamiano
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

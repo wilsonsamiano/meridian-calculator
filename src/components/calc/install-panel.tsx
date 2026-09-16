@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { Check, Copy, Download, Monitor, X } from "lucide-react";
-
-const SOURCE_URL = "https://github.com/wilsonsamiano/meridian-calculator";
-const LICENSE_URL = "https://github.com/wilsonsamiano/meridian-calculator/blob/main/LICENSE";
+import { Check, Coffee, Copy, Download, Monitor, X } from "lucide-react";
+import { APK_URL, COFFEE_URL, LICENSE_URL, SOURCE_URL, isNativeShell } from "@/lib/calc/links";
 
 type Platform = "linux" | "windows" | "mac" | "ios" | "android" | "other";
 type Browser = "brave" | "chrome" | "edge" | "safari" | "firefox" | "other";
@@ -129,7 +127,7 @@ export function InstallControls() {
     setInstalled(isStandalone());
     setPlatform(detectPlatform());
     setBrowser(detectBrowser());
-    if ("serviceWorker" in navigator) {
+    if ("serviceWorker" in navigator && !isNativeShell()) {
       const swUrl = `${import.meta.env.BASE_URL}sw.js`;
       navigator.serviceWorker.register(swUrl).catch(() => undefined);
     }
@@ -150,7 +148,7 @@ export function InstallControls() {
     };
   }, []);
 
-  if (installed) return null;
+  if (installed || isNativeShell()) return null;
 
   const nativeInstall = async () => {
     if (!promptEvent) return;
@@ -226,6 +224,16 @@ export function InstallControls() {
               </button>
             ) : null}
 
+            {platform === "android" ? (
+              <a
+                href={APK_URL}
+                className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-accent text-sm font-medium text-accent-fg"
+              >
+                <Download className="size-4" strokeWidth={1.75} />
+                Download Android APK
+              </a>
+            ) : null}
+
             <ol className="mt-4 space-y-3 text-sm leading-relaxed text-fg">
               {isIos ? (
                 <>
@@ -252,19 +260,10 @@ export function InstallControls() {
               ) : null}
 
               {platform === "android" ? (
-                isBrave ? (
-                  <li>
-                    <span className="font-medium">Brave:</span> tap the menu (☰) →{" "}
-                    <span className="text-accent">Install app</span> /{" "}
-                    <span className="text-accent">Add to Home screen</span>. If the option is missing, set Shields Down
-                    for this site and reload.
-                  </li>
-                ) : (
-                  <li>
-                    Browser menu → <span className="text-accent">Install app</span> /{" "}
-                    <span className="text-accent">Add to Home screen</span>.
-                  </li>
-                )
+                <li>
+                  Prefer the APK above if the browser install button is missing. After it downloads, open the file
+                  and allow install from this source.
+                </li>
               ) : null}
 
               {platform === "linux" || platform === "windows" || platform === "mac" || platform === "other"
@@ -336,6 +335,21 @@ mv ~/Downloads/meridian.desktop ~/.local/share/applications/`}
             </ol>
 
             <div className="mt-5 flex flex-wrap gap-2 border-t border-border pt-4 text-sm">
+              <a
+                href={APK_URL}
+                className="inline-flex min-h-11 items-center rounded-md bg-raised px-3 font-medium text-fg shadow-[var(--shadow-border)]"
+              >
+                Android APK
+              </a>
+              <a
+                href={COFFEE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-raised px-3 font-medium text-fg shadow-[var(--shadow-border)]"
+              >
+                <Coffee className="size-4" strokeWidth={1.75} />
+                Buy me a coffee
+              </a>
               <a
                 href={SOURCE_URL}
                 target="_blank"

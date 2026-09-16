@@ -11,7 +11,7 @@ import { InstallControls } from "./install-panel";
 import { Keypad } from "./keypad";
 import { PlotList } from "./plot-list";
 import { TableView } from "./table-view";
-import { WindowPanel } from "./window-panel";
+import { COFFEE_URL } from "@/lib/calc/links";
 
 export function CalculatorApp() {
   const tab = useCalcStore((s) => s.tab);
@@ -105,14 +105,14 @@ export function CalculatorApp() {
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="https://buymeacoffee.com/wilsonsamiano"
+            href={COFFEE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-9 items-center gap-1.5 rounded-md px-2 text-muted transition-colors duration-150 hover:text-fg"
+            className="inline-flex min-h-11 min-w-11 items-center gap-1.5 rounded-md px-2 text-muted transition-colors duration-150 hover:text-fg"
             aria-label="Buy me a coffee"
           >
             <Coffee className="size-4" strokeWidth={1.75} />
-            <span className="hidden text-xs font-medium wide:inline squat:hidden">Coffee</span>
+            <span className="text-xs font-medium squat:hidden">Coffee</span>
           </a>
           <InstallControls />
           <div
