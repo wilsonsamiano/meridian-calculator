@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Check, Coffee, Copy, Download, Monitor, X } from "lucide-react";
-import { APK_URL, COFFEE_URL, LICENSE_URL, SOURCE_URL, isNativeShell } from "@/lib/calc/links";
+import { Check, Copy, Download, Monitor, X } from "lucide-react";
+import { APK_URL, LICENSE_URL, SOURCE_URL, isNativeShell } from "@/lib/calc/links";
+import { CoffeeButton } from "./coffee-button";
 
 type Platform = "linux" | "windows" | "mac" | "ios" | "android" | "other";
 type Browser = "brave" | "chrome" | "edge" | "safari" | "firefox" | "other";
@@ -341,15 +342,10 @@ mv ~/Downloads/meridian.desktop ~/.local/share/applications/`}
               >
                 Android APK
               </a>
-              <a
-                href={COFFEE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-raised px-3 font-medium text-fg shadow-[var(--shadow-border)]"
-              >
-                <Coffee className="size-4" strokeWidth={1.75} />
-                Buy me a coffee
-              </a>
+              <CoffeeButton
+                className="min-h-11 rounded-md bg-raised px-3 font-medium text-fg shadow-[var(--shadow-border)]"
+                label="Buy me a coffee"
+              />
               <a
                 href={SOURCE_URL}
                 target="_blank"

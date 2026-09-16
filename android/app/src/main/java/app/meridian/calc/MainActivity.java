@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
     settings.setJavaScriptCanOpenWindowsAutomatically(true);
     settings.setCacheMode(WebSettings.LOAD_DEFAULT);
     settings.setMediaPlaybackRequiresUserGesture(false);
+    web.addJavascriptInterface(new NativeBridge(), "MeridianNative");
 
     web.setWebViewClient(
         new WebViewClient() {
@@ -89,6 +91,14 @@ public class MainActivity extends Activity {
         });
 
     web.loadUrl("https://" + ASSET_HOST + "/assets/www/index.html");
+  }
+
+  private class NativeBridge {
+    @JavascriptInterface
+    public void openUrl(String url) {
+      if (url == null) return;
+      runOnUiThread(() -> openExternal(Uri.parse(url)));
+    }
   }
 
   private boolean openExternal(Uri url) {

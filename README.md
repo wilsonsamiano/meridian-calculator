@@ -26,7 +26,7 @@ Brave on iPhone cannot install web apps (Apple). Open the same link in Safari, t
 
 **License:** [MIT](LICENSE) · **Source:** [github.com/wilsonsamiano/meridian-calculator](https://github.com/wilsonsamiano/meridian-calculator)
 
-Support development: [Buy me a coffee](https://www.buymeacoffee.com/wilsonsamiano)
+Support development: [Buy me a coffee](https://buymeacoffee.com/wilsonsamiano)
 
 ## Desktop launcher (optional)
 

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import type { ReactNode } from "react";
-import { Calculator, Coffee, LineChart, Table2 } from "lucide-react";
+import { Calculator, LineChart, Table2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCalcStore } from "@/store/calculator";
+import { CoffeeButton } from "./coffee-button";
 import { Display } from "./display";
 import { GraphCanvas } from "./graph-canvas";
 import { GraphToolbar } from "./graph-toolbar";
@@ -11,7 +12,7 @@ import { InstallControls } from "./install-panel";
 import { Keypad } from "./keypad";
 import { PlotList } from "./plot-list";
 import { TableView } from "./table-view";
-import { COFFEE_URL } from "@/lib/calc/links";
+import { WindowPanel } from "./window-panel";
 
 export function CalculatorApp() {
   const tab = useCalcStore((s) => s.tab);
@@ -104,16 +105,7 @@ export function CalculatorApp() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <a
-            href={COFFEE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 min-w-11 items-center gap-1.5 rounded-md px-2 text-muted transition-colors duration-150 hover:text-fg"
-            aria-label="Buy me a coffee"
-          >
-            <Coffee className="size-4" strokeWidth={1.75} />
-            <span className="text-xs font-medium squat:hidden">Coffee</span>
-          </a>
+          <CoffeeButton />
           <InstallControls />
           <div
             className="hidden rounded-md bg-raised p-0.5 shadow-[var(--shadow-border)] wide:flex"
