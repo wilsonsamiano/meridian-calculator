@@ -12,3 +12,5 @@ dist
 screenshots
 artifacts
 attachments
+.tanstack
+.node_modules.lock
