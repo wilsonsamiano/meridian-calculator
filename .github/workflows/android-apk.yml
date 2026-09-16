@@ -52,28 +52,34 @@ jobs:
       - name: Stage APK
         run: |
           mkdir -p dist
+          TAG="${GITHUB_REF_NAME:-v1.0.2}"
+          TAG="${TAG#v}"
           cp android/app/build/outputs/apk/release/app-release.apk dist/meridian.apk
-          ls -lh dist/meridian.apk
+          cp android/app/build/outputs/apk/release/app-release.apk "dist/Meridian-${TAG}.apk"
+          ls -lh dist
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.2' }}
           name: Meridian ${{ github.ref_type == 'tag' && github.ref_name || 'v1.0.2' }}
-          files: dist/meridian.apk
+          files: |
+            dist/meridian.apk
+            dist/Meridian-*.apk
           fail_on_unmatched_files: true
           make_latest: true
           body: |
-            Offline Android build of **Meridian**.
+            **Meridian 1.0.2** Android APK (coffee link, install sheet, offline calculator).
 
-            **Direct download:** [meridian.apk](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)
+            - Versioned file: [Meridian-1.0.2.apk](https://github.com/wilsonsamiano/meridian-calculator/releases/download/v1.0.2/Meridian-1.0.2.apk)
+            - Latest alias: [meridian.apk](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)
 
             1. Download the APK on your Android phone or tablet.
             2. Open it. Allow install from this source if Android asks.
-            3. If you already had v1.0.0, install this over it.
+            3. Install over any older Meridian build.
 
             Web app: https://wilsonsamiano.github.io/meridian-calculator/
 
-            Buy me a coffee: https://www.buymeacoffee.com/wilsonsamiano
+            Buy me a coffee: https://buymeacoffee.com/wilsonsamiano
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

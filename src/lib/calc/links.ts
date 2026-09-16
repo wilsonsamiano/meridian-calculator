@@ -3,7 +3,7 @@ export const SOURCE_URL = "https://github.com/wilsonsamiano/meridian-calculator"
 export const LICENSE_URL = "https://github.com/wilsonsamiano/meridian-calculator/blob/main/LICENSE";
 export const WEB_APP_URL = "https://wilsonsamiano.github.io/meridian-calculator/";
 export const APK_URL =
-  "https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk";
+  "https://github.com/wilsonsamiano/meridian-calculator/releases/download/v1.0.2/Meridian-1.0.2.apk";
 export const RELEASES_URL = "https://github.com/wilsonsamiano/meridian-calculator/releases/latest";
 
 export function isNativeShell() {

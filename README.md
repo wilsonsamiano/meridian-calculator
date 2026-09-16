@@ -4,13 +4,13 @@ Open-source **offline graphing calculator**. Plot functions, trace values, and c
 
 ## Android APK
 
-**[Download the APK](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)** (`meridian.apk`)
+**[Download Meridian 1.0.2](https://github.com/wilsonsamiano/meridian-calculator/releases/download/v1.0.2/Meridian-1.0.2.apk)** — file name `Meridian-1.0.2.apk`
 
-1. Tap that link on your Android phone or tablet — it should download the file.
-2. Open `meridian.apk`. Allow install from the browser if Android asks.
-3. Meridian shows up in the app drawer and works **offline**.
+Always-latest link: [meridian.apk](https://github.com/wilsonsamiano/meridian-calculator/releases/latest/download/meridian.apk)
 
-If an older build is already installed, install this one over it.
+1. Tap the download on your Android phone or tablet.
+2. Open the APK. Allow install from the browser if Android asks.
+3. If an older Meridian is already installed, install this over it.
 
 ## Use / install the web app
 
